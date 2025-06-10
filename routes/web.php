@@ -33,8 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('projects', ProjectController::class);
     
     Route::resource('projects.building-parts', BuildingPartController::class)->parameters([
-        'projects' => 'project',
-        'building-parts' => 'buildingPart'
+        'building-parts' => 'buildingPart' // Cukup definisikan ini karena 'projects' akan otomatis terikat ke 'project'
     ]);
     
     Route::resource('building-part-types', BuildingPartTypeController::class);
