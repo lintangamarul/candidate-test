@@ -6,6 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,11 @@ class ProjectController extends Controller
      */
     public function index(): View
     {
-        $projects = Project::latest()->paginate(10);
+        // Hanya tampilkan project milik user yang sedang login
+        $projects = Project::where('user_id', Auth::id())
+                          ->latest()
+                          ->paginate(10);
+
         return view('projects.index', compact('projects'));
     }
 
@@ -36,9 +41,11 @@ class ProjectController extends Controller
             'description' => 'required|string',
         ]);
 
+        // Tambahkan user_id saat membuat project baru
         Project::create([
             'name' => $request->name,
             'description' => $request->description,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('projects.index')
@@ -48,9 +55,23 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    
+    public function show(Project $project): View
+    {
+        // Pastikan user hanya bisa melihat project miliknya
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to this project.');
+        }
+
+        return view('projects.show', compact('project'));
+    }
+
     public function edit(Project $project): View
     {
+        // Pastikan user hanya bisa edit project miliknya
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to this project.');
+        }
+
         return view('projects.edit', compact('project'));
     }
 
@@ -59,6 +80,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project): RedirectResponse
     {
+        // Pastikan user hanya bisa update project miliknya
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to this project.');
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -78,9 +104,14 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project): RedirectResponse
     {
+        // Pastikan user hanya bisa delete project miliknya
+        if ($project->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized access to this project.');
+        }
+
         $project->delete();
 
         return redirect()->route('projects.index')
             ->with('success', 'Project deleted successfully.');
-    }
+     }
 }

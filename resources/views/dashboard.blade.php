@@ -5,7 +5,7 @@
 
 @section('page-actions')
     <div class="flex items-center space-x-3">
-        <a href="{{ route('projects.index') }}" 
+        <a href="{{ route('projects.index') }}"
            class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm font-medium inline-flex items-center">
             <i class="fas fa-project-diagram mr-2"></i>
             View Projects
@@ -98,12 +98,18 @@
                         <div>
                             <h4 class="font-medium text-gray-900">{{ $project->name }}</h4>
                             <p class="text-sm text-gray-500 mt-1">{{ Str::limit($project->description, 100) }}</p>
-                            <div class="mt-2 flex items-center text-sm text-gray-500">
-                                <i class="fas fa-calendar-alt mr-1.5"></i>
-                                <span>Created {{ $project->created_at->diffForHumans() }}</span>
+                            <div class="mt-2 space-y-1">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-user mr-1.5"></i>
+                                    <span>Created by {{ $project->user->name }}</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-calendar-alt mr-1.5"></i>
+                                    <span>Created {{ $project->created_at->diffForHumans() }}</span>
+                                </div>
                             </div>
                         </div>
-                        <a href="{{ route('projects.show', $project) }}" 
+                        <a href="{{ route('projects.show', $project) }}"
                            class="text-sm text-blue-600 hover:text-blue-800 inline-flex items-center">
                             View
                             <i class="fas fa-chevron-right ml-1"></i>
@@ -146,7 +152,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <div class="flex items-start">
                     <div class="flex-shrink-0 mt-1">
                         <div class="p-2 rounded-full bg-green-100 text-green-600">
@@ -160,7 +166,7 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <div class="flex items-start">
                     <div class="flex-shrink-0 mt-1">
                         <div class="p-2 rounded-full bg-purple-100 text-purple-600">
@@ -175,13 +181,13 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="mt-6 bg-blue-50 rounded-lg p-4">
                 <h4 class="text-sm font-medium text-blue-800">Need help?</h4>
                 <p class="text-sm text-blue-700 mt-1">
                     Check our documentation or contact support if you have any questions.
                 </p>
-                <a href="https://wa.me/6288290320097" target="_blank" 
+                <a href="https://wa.me/6288290320097" target="_blank"
    class="mt-2 text-sm font-medium text-green-600 hover:text-green-800 inline-flex items-center">
     Hubungi Saya via WA
     <i class="fab fa-whatsapp ml-1"></i>
