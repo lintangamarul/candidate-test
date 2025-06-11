@@ -16,6 +16,7 @@ class ProjectSeeder extends Seeder
         DB::table('projects')->insert([
             [
                 'id' => 3,
+                'user_id' => 2,
                 'name' => "Lintang's House",
                 'description' => "Build Lintang's House in Semarang City",
                 'created_at' => '2025-06-09 06:46:27',
@@ -23,6 +24,7 @@ class ProjectSeeder extends Seeder
             ],
             [
                 'id' => 4,
+                'user_id' => 2,
                 'name' => 'Building an Apartement',
                 'description' => 'Building a magnificent apartment in ungaran district',
                 'created_at' => '2025-06-09 06:50:21',
@@ -30,6 +32,7 @@ class ProjectSeeder extends Seeder
             ],
             [
                 'id' => 5,
+                'user_id' => 2,
                 'name' => 'Housing Renovation',
                 'description' => 'Project to renovate existing public housing in Pedurungan as subsidized housing.',
                 'created_at' => '2025-06-09 06:53:45',
