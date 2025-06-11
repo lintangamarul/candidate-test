@@ -16,7 +16,7 @@ class ProjectSeeder extends Seeder
         DB::table('projects')->insert([
             [
                 'id' => 3,
-                'user_id' => 2,
+                 'user_id' => 2,
                 'name' => "Lintang's House",
                 'description' => "Build Lintang's House in Semarang City",
                 'created_at' => '2025-06-09 06:46:27',

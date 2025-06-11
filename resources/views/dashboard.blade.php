@@ -96,19 +96,19 @@
                 <div class="p-6 hover:bg-gray-50 transition-colors duration-150">
                     <div class="flex items-start justify-between">
                         <div>
-    <h4 class="font-medium text-gray-900">{{ $project->name }}</h4>
-    <p class="text-sm text-gray-500 mt-1">{{ Str::limit($project->description, 100) }}</p>
-    <div class="mt-2 space-y-1">
-        <div class="flex items-center text-sm text-gray-500">
-            <i class="fas fa-user mr-1.5"></i>
-            <span>Created by {{ $project->user->name }}</span>
-        </div>
-        <div class="flex items-center text-sm text-gray-500">
-            <i class="fas fa-calendar-alt mr-1.5"></i>
-            <span>Created {{ $project->created_at->diffForHumans() }}</span>
-        </div>
-    </div>
-</div>
+                            <h4 class="font-medium text-gray-900">{{ $project->name }}</h4>
+                            <p class="text-sm text-gray-500 mt-1">{{ Str::limit($project->description, 100) }}</p>
+                            <div class="mt-2 space-y-1">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-user mr-1.5"></i>
+                                    <span>Created by {{ $project->user->name }}</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="fas fa-calendar-alt mr-1.5"></i>
+                                    <span>Created {{ $project->created_at->diffForHumans() }}</span>
+                                </div>
+                            </div>
+                        </div>
                         <a href="{{ route('projects.show', $project) }}"
                            class="text-sm text-blue-600 hover:text-blue-800 inline-flex items-center">
                             View

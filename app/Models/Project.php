@@ -20,10 +20,10 @@ class Project extends Model
     {
         return $this->hasMany(BuildingPart::class);
     }
-public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+    public function user(): BelongsTo
+        {
+            return $this->belongsTo(User::class);
+        }
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
