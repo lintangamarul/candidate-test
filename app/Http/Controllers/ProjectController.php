@@ -13,15 +13,23 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
-    {
-        // Hanya tampilkan project milik user yang sedang login
-        $projects = Project::where('user_id', Auth::id())
-                          ->latest()
-                          ->paginate(10);
-
-        return view('projects.index', compact('projects'));
+    public function index(Request $request): View
+{
+    $query = Project::where('user_id', Auth::id());
+    
+    // Tambahkan pencarian jika ada parameter search
+    if ($request->filled('search')) {
+        $search = $request->get('search');
+        $query->where(function($q) use ($search) {
+            $q->where('name', 'like', '%' . $search . '%')
+              ->orWhere('description', 'like', '%' . $search . '%');
+        });
     }
+    
+    $projects = $query->latest()->paginate(10);
+    
+    return view('projects.index', compact('projects'));
+}
 
     /**
      * Show the form for creating a new resource.
